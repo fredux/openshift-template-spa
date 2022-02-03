@@ -1,0 +1,14 @@
+#logar no openshift
+oc login https://api.na46.prod.nextcle.com:6443 -u xsyhdc -p 66830ef2e09f49c6a8af
+
+#Criando o templete 
+oc create -f golang-ex.yaml -n fatesg-v1
+
+#criando o app
+oc new-app -n fatesg-v1 -p SOURCE_REPOSITORY_URL=https://github.com/openshift/golang-ex beego-example
+
+#deletando um templete
+oc delete template/fatesg-spa -n fatesg-v1
+
+#deletando um app
+oc delete all -l app=golang-app
